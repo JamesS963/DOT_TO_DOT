@@ -22,11 +22,22 @@
                   </md-card-content>
 
                   <a href="#" [routerLink]="['/donations',project.id]">donate</a>
-
+                  <div style="display: block" *ngFor="let j = 'index'; let item of project.itemsWanted">
+                    <ng-container *ngIf="setChartDate(project, i, j)">
+                      <h2 align="center">{{item.name}}</h2>
+                      <canvas baseChart
+                              [data]="doughnutChartData[i][j]"
+                              [labels]="doughnutChartLabels"
+                              [chartType]="doughnutChartType"
+                              (chartHover)="chartHovered($event)"
+                              (chartClick)="chartClicked($event)"></canvas>
+                    </ng-container>
+                  </div>
                 </md-card>
               </ng-container>
             </ng-container>
           </div>
+
           <md-paginator (page)="1" [pageSize]="5" >
           </md-paginator>
 
@@ -39,7 +50,7 @@
         <md-tab label="Live Projects">
 
           <div class='md-padding' layout="row" layout-wrap>
-            <ng-container *ngFor="let project of projects|async ">
+            <ng-container *ngFor="let i = 'index'; let project of projects|async ">
           <md-card class="myCard {{project.type}}" *ngIf="isCurrent(project)" >
 
             <img md-card-image src="{{project.image}}" alt="Project Image" />
@@ -55,6 +66,18 @@
             </md-card-content>
 
             <a href="#" [routerLink]="['/donations',project.id]">donate</a>
+            <div style="display: block" *ngFor="let j = 'index'; let item of project.itemsWanted">
+              <ng-container *ngIf="setChartDate(project, i, j)">
+                <h2 align="center">{{item.name}}</h2>
+              <canvas baseChart
+                      [data]="doughnutChartData[i][j]"
+                      [labels]="doughnutChartLabels"
+                      [chartType]="doughnutChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+              </ng-container>
+            </div>
+
           </md-card>
             </ng-container>
             <md-paginator (page)="1" [pageSize]="5" >
@@ -65,12 +88,12 @@
 
         </md-tab>
 
-        <md-tab label="archived Projects">
+        <md-tab label="Archived Projects">
 
           <div class='md-padding' layout="row" layout-wrap>
 
 
-            <ng-container  *ngFor="let project of projects|async ">
+            <ng-container  *ngFor="let i = 'index'; let project of projects|async ">
             <md-card class="myCard {{project.type}}"  *ngIf="isArchived(project)">
 
               <img md-card-image src="{{project.image}}" alt="Project Image" />
@@ -86,6 +109,17 @@
               </md-card-content>
 
               <a href="#" [routerLink]="['/donations',project.id]">donate</a>
+              <div style="display: block" *ngFor="let j = 'index'; let item of project.itemsWanted">
+                <ng-container *ngIf="setChartDate(project, i, j)">
+                  <h2 align="center">{{item.name}}</h2>
+                  <canvas baseChart
+                          [data]="doughnutChartData[i][j]"
+                          [labels]="doughnutChartLabels"
+                          [chartType]="doughnutChartType"
+                          (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)"></canvas>
+                </ng-container>
+              </div>
             </md-card>
             </ng-container>
 
@@ -120,7 +154,7 @@
         -->
 
 
-        <md-tab label="suppliers">
+        <md-tab label="Suppliers">
 
           <div class='md-padding' layout="row" layout-wrap>
 

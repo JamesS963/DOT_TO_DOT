@@ -60,8 +60,8 @@ export class MyProjectComponent implements OnInit {
     this.donationsService.acceptDonation();
   }
 
-  acceptHours(hours, id, i ) {
-    this.donationsService.setWorkingTime(hours, this.id, id, i);
+  acceptHours(hours, donationIndex ) {
+    this.donationsService.setWorkingTime(hours, this.id, donationIndex);
     this.donationsService.acceptWorkingTime();
   }
   declineDonation() {

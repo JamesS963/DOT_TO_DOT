@@ -4,10 +4,10 @@ import {AppRouting} from '../app.routing';
 import {AF} from '../providers/af';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AngularFireModule} from 'angularfire2';
-import {Member,Project,Message} from '../providers/project';
+import {Member, Project, Message} from '../providers/project';
 import {AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import {AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
-import {FacebookModule,FacebookService, InitParams} from 'ngx-facebook';
+import {FacebookModule, FacebookService, InitParams} from 'ngx-facebook';
 import {MD_PROVIDERS} from '../app.material.providers';
 /* Updated by Alexander for angular 4 */
 
@@ -18,6 +18,10 @@ import {MD_PROVIDERS} from '../app.material.providers';
 })
 export class ProjectsComponent implements OnInit {
 
+  // chart stuff
+  public doughnutChartLabels: string[] = ['Total got', 'Amount Needed'];
+  public doughnutChartData: number[][] = [[350, 450]];
+  public doughnutChartType: string = 'doughnut';
   currentUser: FirebaseObjectObservable<any>;
   error: any;
   project: FirebaseObjectObservable<Project>;
@@ -37,6 +41,7 @@ export class ProjectsComponent implements OnInit {
   notifications: FirebaseListObservable<any>;
   itemsWanted: FirebaseListObservable<any>;
   joined: boolean = false;
+  counter: number = 0;
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   public newMessage: string;
 
@@ -58,6 +63,20 @@ export class ProjectsComponent implements OnInit {
     this.projectID = this.route.snapshot.params['id'];
     this.project.subscribe((p) => {
       this.projectData = p;
+
+      if (p.itemsWanted != null) {
+        for (const item of p.itemsWanted) {
+          let first = parseInt(item.amountRequired, 10);
+          let second = parseInt(item.currentAmount, 10);
+          first = (second / first) * 100;
+          second = 100 - first;
+          this.doughnutChartData.push([]);
+          this.doughnutChartData[this.counter][0] = first;
+          this.doughnutChartData[this.counter][1] = second;
+          this.counter++;
+
+        }
+      }
       // for (m in p.members){
       // console.log (m.id)
       // }
@@ -133,6 +152,13 @@ export class ProjectsComponent implements OnInit {
       return true;
   }
 
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
 
 
 }

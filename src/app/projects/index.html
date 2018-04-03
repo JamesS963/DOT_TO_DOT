@@ -1,4 +1,4 @@
-<div class="col-sm-8">
+<div class="col-sm-4">
   <md-card class ="myCard {{(project|async)?.type}}">
     <md-card-title >
       <p><img class="card-avatar" src="{{(project|async)?.icon}}" /><strong>&nbsp; &nbsp; {{(project|async)?.name}}</strong></p>
@@ -24,18 +24,30 @@
 
       <p>https://dev.dots.scot/projects/{{(project|async)?.id}}</p>
 
-      <div align="right">
-        <h2>donations</h2>
-        <div *ngFor=" let i = 'index'; let donation of itemsWanted | async">
-          <p>{{donation.name}}</p>
-          <p>total: {{donation.currentAmount}}/{{donation.amountRequired}}</p>
-        </div>
-      </div>
+
 
       <fb-share href ="https://dev.dots.scot/#/projects/{{(project|async)?.id}}"  layout="button" size="large" ></fb-share>
       <div *ngIf="joined === false"><button class="md-raised md-primary" (click)="join()">Join project</button> </div>
 
     </md-card-content>
+  </md-card>
+
+</div>
+<div class="col-sm-4">
+  <md-card class ="myCard {{(project|async)?.type}}">
+
+      <h2 align = "center">donations</h2>
+      <div *ngFor=" let i = 'index'; let donation of itemsWanted | async">
+        <h2 align="center">{{donation.name}}</h2>
+
+        <canvas baseChart
+                [data]="doughnutChartData[i]"
+                [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+        <p align = "right">total: {{donation.currentAmount}}/{{donation.amountRequired}}</p>
+      </div>
   </md-card>
 </div>
 

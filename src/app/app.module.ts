@@ -129,6 +129,7 @@ import { SuppliersComponent } from './suppliers/suppliers.component';
 import { MySuppliesComponent } from './my-supplies/my-supplies.component';
 import { CollectSuppliesComponent } from './collect-supplies/collect-supplies.component';
 import { MySupplyComponent } from './my-supply/my-supply.component';
+import {ChartsModule} from 'ng2-charts';
 export let MD_MODULES: any = [
   MdButtonModule,
   MdButtonToggleModule,
@@ -162,7 +163,7 @@ export let MD_MODULES: any = [
 ];
 
 /*  LIVE */
-/*
+
 export const firebaseConfig = {
   apiKey: 'AIzaSyBN2oxnV4Seen_IxxrNzPeTMZOH1eWb2oc',
   authDomain: 'project--1058925460034076790.firebaseapp.com',
@@ -170,11 +171,12 @@ export const firebaseConfig = {
   storageBucket: 'project--1058925460034076790.appspot.com',
   messagingSenderId: '779470844821'
 };
-*/
+
 
 
 
 /////   DEV
+/*
 export const firebaseConfig = {
   apiKey: 'AIzaSyBw-rY-khKozG8qeSqdO7iO6fdyc5bt5Qo',
   authDomain: 'project--5383574466381407389.firebaseapp.com',
@@ -183,6 +185,7 @@ export const firebaseConfig = {
   storageBucket: 'project--5383574466381407389.appspot.com',
   messagingSenderId: '6272813349'
 };
+*/
 
 
 /*
@@ -250,6 +253,7 @@ export consrebaseAuthConfig = {
     // FilterProjectPipe
   ],
   imports: [
+    ChartsModule,
     BrowserModule,
     FormsModule,
     HttpModule,

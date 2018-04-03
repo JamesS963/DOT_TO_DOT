@@ -23,6 +23,12 @@ export class ProjectSummaryComponent implements OnInit {
    dd: Date;
    mm: Date;
    yyyy: Date;
+  public doughnutChartLabels: string[] = ['Total got', 'Amount Needed'];
+  public doughnutChartData: number[][][] = [[[350, 450]]];
+  public doughnutChartType: string = 'doughnut';
+
+  // events
+
 
   donut: DonutChart;
   pageEvent: PageEvent;
@@ -61,9 +67,11 @@ export class ProjectSummaryComponent implements OnInit {
         const sd = new Date(project.startDate);
         const ed = new Date(project.endDate);
         const currDate = new Date();
+
         // alert(currDate);
        // alert (ed);
         if (  ed > currDate) {
+
           return true;
         } else {
           return false;
@@ -72,4 +80,31 @@ export class ProjectSummaryComponent implements OnInit {
         return false;
       }
     }
+    setChartDate(project, i, j) {
+
+      const itemsWanted = project.itemsWanted;
+
+      if (itemsWanted != null) {
+        for (let n = 0; n <= i; n++) {
+          this.doughnutChartData.push([]);
+        }
+          let first = parseInt(itemsWanted[j].amountRequired, 10);
+          let second = parseInt(itemsWanted[j].currentAmount, 10);
+          first = (second / first) * 100;
+          second = 100 - first;
+          this.doughnutChartData[i].push([]);
+          this.doughnutChartData[i][j] = [];
+          this.doughnutChartData[i][j].push(0);
+          this.doughnutChartData[i][j][0] = first;
+          this.doughnutChartData[i][j][1] = second;
+      }
+      return true;
+    }
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
 }

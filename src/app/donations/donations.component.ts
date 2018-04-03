@@ -35,8 +35,11 @@ export class DonationsComponent implements OnInit {
       details: details,
       accepted: false,
       user: this.afService.userID
+    }).then((e) => {
+      this.db.object('projects/' + this.route.snapshot.params['id'] + '/workingHours/' + e.key).update({id: e.key});
     });
-  }
+
+    }
   ngOnInit() {
   }
 

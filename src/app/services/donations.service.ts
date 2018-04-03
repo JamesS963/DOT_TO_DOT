@@ -26,19 +26,19 @@ export class DonationsService {
       currentAmount: currentAmount,
     });
   }
-  setWorkingTime(amount, project, id, did) {
-    this.newWorkingAmmount = amount;
-    this.hours = this.af.object('projects/' + project);
+  setWorkingTime(hours, projectID, donationIndex) {
+    this.newWorkingAmmount = hours;
+    this.hours = this.af.object('projects/' + projectID);
     this.hours.subscribe((e) => {
       this.h = e.currentHours;
     });
-    this.af.object('projects/' + project + '/workingHours/' + did).update({
+    this.af.object('projects/' + projectID + '/workingHours/' + donationIndex).update({
       accepted: true
     });
   }
 
   acceptWorkingTime() {
-    const currentHours = Number(this.h.currentHours) + Number(this.newWorkingAmmount);
+    const currentHours = Number(this.h) + Number(this.newWorkingAmmount);
     this.hours.update({
       currentHours: currentHours
     });

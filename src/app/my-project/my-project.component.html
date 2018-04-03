@@ -90,7 +90,7 @@
     <div *ngIf="hour.accepted === false">
       <p> Amount: {{hour.hours}}</p>
       <p>details: {{hour.details}}</p>
-      <button (click)="acceptHours(hours.hours, donation.itemID, hours.id )">accept</button>
+      <button (click)="acceptHours(hour.hours, hour.id )">accept</button>
     </div>
   </div>
 </md-card>
