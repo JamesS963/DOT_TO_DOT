@@ -2,7 +2,9 @@
   <h1 align="center">Add information to your profile</h1>
 </div>
 
-<form (submit)="editprofile($event, name.value, biography.value, skills.value, facebook.value, twitter.value)">
+
+
+<form (submit)="register($event, name.value, biography.value, skills.value, facebook.value, twitter.value)">
   <div class="col-sm-3">
     <div class = "card" style="width:75% " align="left">
       <h2>Profile picture</h2>
@@ -35,7 +37,11 @@
 
   <div class="col-sm-9">
     <div class = "card" style="width:75% " align="center">
-
+      <div *ngIf="error" class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{error}}
+      </div>
 
 
 

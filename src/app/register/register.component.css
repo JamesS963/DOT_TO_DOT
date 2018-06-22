@@ -1,4 +1,4 @@
-.container{
+.container {
   padding: 30px;
   max-width: 350px;
   width: 100% !important;
@@ -27,7 +27,6 @@
   text-align: center;
 }
 
-
 :host md-card-title,
 :host md-card-subtitle {
   text-align: left;
@@ -54,6 +53,7 @@
 :host button:hover {
   background-color: yellow;
 }
+
 .button {
   background-color: lightyellow; /* Light yellow */
   border: none;
@@ -65,9 +65,10 @@
   font-size: 16px;
 }
 
-#register{
+#register {
   color: black !important;
 }
-#register:hover{
+
+#register:hover {
   color: white !important;
 }

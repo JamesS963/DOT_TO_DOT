@@ -8,10 +8,7 @@ import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-/*import {  FIREBASE_PROVIDERS, AngularFireModule
-  AngularFire,
-  AuthMethods,
-  AuthProviders} from 'angularfire2/';*/
+
 
 
 
@@ -27,18 +24,14 @@ import { ProjectsComponent } from './projects/projects.component';
 import { UsersProfilesComponent } from './users-profiles/users-profiles.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-// import {GoogleMapsComponent} from './maps/googlemaps.component';
+
 import {CoreModule} from './app.core.modules';
-import {AlertService} from './services/alert.service';
 import { Ng2MapModule} from 'ng2-map';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FacebookModule } from 'ngx-facebook';
 
 import 'hammerjs';
-// MATERIAL DESIGN MODULES
-// import { MdToolbarModule  } from '@angular2-material/toolbar';
-// import { MdButtonModule } from '@angular2-material/button';
-//  import { MdCardModule } from '@angular2-material/card';
+
 import {MdAutocompleteModule,
   MdButtonModule,
   MdButtonToggleModule,
@@ -84,7 +77,7 @@ import {CreateProjectComponent} from './createProject/createProject.component';
 import {AccountSetupComponent} from './accountSetup/accountSetup.component';
 import {ProjectService} from './services/localProject.service';
 import {UserService} from './services/localUser.service';
-import {GetProjects} from './localStorage/projects';
+import {UserAuthService} from './services/user-auth/user-auth.service';
 import {MyProfileComponent} from './myProfile/myProfile.component';
 import {CreateAdminComponent} from './createAdmin/createAdmin.component';
 import {AdminDashboardComponent} from './adminDashboard/adminDashboard.component';
@@ -121,7 +114,7 @@ import {FirebaseDataProvider} from './providers/firebaseDataProvider';
 import { DonationsComponent } from './donations/donations.component';
 import { FileTypeValidatorDirective } from './directives/file-type-validator.directive';
 import { FacebookPostsComponent } from './facebook-posts/facebook-posts.component';
-// import { FilterProjectPipe } from './filter-project.pipe';
+
 import {FaceBookPostsService} from './providers/facebook-graph-service.service';
 import {PostsList} from './facebook-posts/facebook-posts-list';
 import {DonationsService} from './services/donations.service';
@@ -130,6 +123,7 @@ import { MySuppliesComponent } from './my-supplies/my-supplies.component';
 import { CollectSuppliesComponent } from './collect-supplies/collect-supplies.component';
 import { MySupplyComponent } from './my-supply/my-supply.component';
 import {ChartsModule} from 'ng2-charts';
+
 export let MD_MODULES: any = [
   MdButtonModule,
   MdButtonToggleModule,
@@ -162,9 +156,9 @@ export let MD_MODULES: any = [
   MdTooltipModule,
 ];
 
-/*  LIVE */
+/*  UAT */
 
-export const firebaseConfig = {
+export const firebaseConfigUAT = {
   apiKey: 'AIzaSyBN2oxnV4Seen_IxxrNzPeTMZOH1eWb2oc',
   authDomain: 'project--1058925460034076790.firebaseapp.com',
   databaseURL: 'https://project--1058925460034076790.firebaseio.com',
@@ -175,9 +169,9 @@ export const firebaseConfig = {
 
 
 
-/////   DEV
-/*
-export const firebaseConfig = {
+/*  DEV */
+
+export const firebaseConfigDEV = {
   apiKey: 'AIzaSyBw-rY-khKozG8qeSqdO7iO6fdyc5bt5Qo',
   authDomain: 'project--5383574466381407389.firebaseapp.com',
   databaseURL: 'https://project--5383574466381407389.firebaseio.com',
@@ -185,7 +179,7 @@ export const firebaseConfig = {
   storageBucket: 'project--5383574466381407389.appspot.com',
   messagingSenderId: '6272813349'
 };
-*/
+
 
 
 /*
@@ -250,7 +244,6 @@ export consrebaseAuthConfig = {
     MySuppliesComponent,
     CollectSuppliesComponent,
     MySupplyComponent
-    // FilterProjectPipe
   ],
   imports: [
     ChartsModule,
@@ -267,7 +260,7 @@ export consrebaseAuthConfig = {
       apiKey: 'AIzaSyBJioRbIuJMQr14RqtvlIA587lm-HMHFD0' // google maps api key
 
     }), // google maps
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfigDEV),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FacebookModule.forRoot(),
@@ -298,6 +291,7 @@ export consrebaseAuthConfig = {
     GeocodingService,
     ProjectService,
     UserService,
+    UserAuthService,
     UploadFileService,
     ProjectFilterDataService,
     MarkersService,

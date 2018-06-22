@@ -1,39 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AF} from '../providers/af';
+import {UserAuthService} from '../services/user-auth/user-auth.service';
 import {Router} from '@angular/router';
-import {AngularFireAuth, AUTH_PROVIDERS } from 'angularfire2/auth';
-import { AngularFireDatabase} from 'angularfire2/database';
-import { AppComponent} from '../app.component';
+import {AngularFireAuth, AUTH_PROVIDERS} from 'angularfire2/auth';
+import {AngularFireDatabase} from 'angularfire2/database';
+import {AppComponent} from '../app.component';
 import {AppRouting} from '../app.routing';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material';
+
 // import { EmailPasswordCredentials } from "angularfire2/auth";
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   title = 'Register for DOT-to-DOT';
-  isAuth = false;
-  authColor = 'warn';
   public error: any;
 
-  constructor(private afService: AF, private router: Router) { }
 
-  register(event, name, email, password) {
-    event.preventDefault();
-    this.afService.registerUser(email, password).then((user) => {
-      this.afService.saveUserInfoFromForm(user.uid, name, email).then(() => {
+  constructor(private authService: UserAuthService, private afService: AF, private router: Router) {
+  }
+
+  register(email, password, event) {
+    this.authService.register(email, password).then((res) => {
+      this.authService.initiateUserAccount(res.uid).then(() => {
         this.router.navigate(['/accountSetup']);
-      })
-        .catch((error) => {
-          this.error = error;
-        });
-    })
-      .catch((error) => {
-        this.error = error;
-        console.log(this.error);
+      }).catch((err) => {
+        this.error = err;
       });
+    }).catch((error) => {
+      this.error = error;
+    });
   }
 
   /*
@@ -85,4 +86,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+
 }
+

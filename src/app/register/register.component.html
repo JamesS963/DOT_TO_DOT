@@ -1,35 +1,33 @@
 <section>
-<md-card>
-  <div class="modal-dialog"  >
-    <div class="loginmodal-container" >
+  <md-card>
+    <div *ngIf="error" class="alert alert-warning" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {{error}}
+    </div>
 
-      <div *ngIf="error" class="alert alert-warning" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        {{error}}
+    <div class="modal-dialog"  >
+      <div class="loginmodal-container" >
+
+    <form  class="form-signin">
+      <h1>Register</h1>
+      <div class="form-group">
+        <input mdInput email placeholder ="Email address"  required ngModel name="email" #email="ngModel" id ="email" type ="text" class ="form-control " >
+        <md-error *ngIf="email.hasError('email') && !email.hasError('required')">
+          Please enter a valid email address
+        </md-error>
+        <md-error *ngIf="email.hasError('required') && email.touched">
+          Email is <strong>required</strong>
+        </md-error>
       </div>
-  <h1>Register</h1>
 
-<form (submit)="register($event, name.value, email.value, password.value)"class="form-signin">
-  <div class="form-group">
-  <label for="name" class="sr-only" >Name</label>
-  <input  #name type="text" id="name" placeholder="Name" class="form-control">
+      <div class="form-group">
+        <input mdInput placeholder ="Password" required ngModel name="password" #password = "ngModel" id ="password" type ="password" class = "form-control">
+      </div>
+      <button md-button (click)="register(email.value, password.value)" class="btn btn-md btn-primary btn-block" id="register">Register</button>
+    </form>
   </div>
-
-  <div class="form-group">
-  <label for="email"  class="sr-only" >email </label>
-  <input #email type="email" id="email" placeholder="Email address" class="form-control">
-  </div>
-
-  <div class = "form-group">
-  <label for="inputPassword" class="sr-only">password</label>
-  <input #password type="password" id="inputPassword" placeholder="Password" class="form-control">
-  </div>
-
-  <button type="submit" class="btn btn-md btn-primary btn-block" id="register">Register</button>
-</form>
-
 </div>
-  </div>
-</md-card>
+
+  </md-card>
 </section>

@@ -21,6 +21,6 @@ export class FirebaseDataProvider {
   };
   data;
   constructor() {
-   this.data = this.live;
+   this.data = this.dev;
   }
 }
